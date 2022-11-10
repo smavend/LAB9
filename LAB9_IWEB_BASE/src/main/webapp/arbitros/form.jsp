@@ -9,10 +9,9 @@
         <title>LAB 9</title>
     </head>
     <body>
-        <div class='container'>
-            <br>
-            <nav class="navbar navbar-expand-md navbar-light bg-light">
-                <a class="navbar-brand" href="#">Clasificatorias Sudamericanas Qatar 2022</a>
+        <nav class="navbar navbar-expand-md navbar-light bg-light">
+            <div class="container col-10">
+                <a class="navbar-brand" href="<%=request.getContextPath()%>/PartidoServlet">Clasificatorias Sudamericanas Qatar 2022</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -26,8 +25,9 @@
                         </li>
                     </ul>
                 </div>
-            </nav>
-
+            </div>
+        </nav>
+        <div class='container'>
             <div class="row mb-4">
                 <div class="col"></div>
                 <div class="col-md-6">
