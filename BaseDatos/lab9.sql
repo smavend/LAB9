@@ -1,10 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `lab9` /*!40100 DEFAULT CHARACTER SET utf8 */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `lab9`;
--- MySQL dump 10.13  Distrib 8.0.24, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.31, for Win64 (x86_64)
 --
 -- Host: localhost    Database: lab9
 -- ------------------------------------------------------
--- Server version	8.0.24
+-- Server version	8.0.31
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,7 +14,8 @@ USE `lab9`;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
+CREATE DATABASE  IF NOT EXISTS `lab9` /*!40100 DEFAULT CHARACTER SET utf8 */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `lab9`;
 --
 -- Table structure for table `arbitro`
 --
@@ -29,7 +28,7 @@ CREATE TABLE `arbitro` (
   `nombre` varchar(45) NOT NULL,
   `pais` varchar(45) NOT NULL,
   PRIMARY KEY (`idArbitro`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +37,7 @@ CREATE TABLE `arbitro` (
 
 LOCK TABLES `arbitro` WRITE;
 /*!40000 ALTER TABLE `arbitro` DISABLE KEYS */;
-INSERT INTO `arbitro` VALUES (1,'Néstor Pitano','Argentina'),(2,'Eber Aquino','Paraguay'),(3,'Guillermo Guerrero','Ecuador'),(4,'Diego Haro','Peru');
+INSERT INTO `arbitro` VALUES (1,'Néstor Pitano','Argentina'),(2,'Eber Aquino','Paraguay'),(3,'Guillermo Guerrero','Ecuador'),(4,'Diego Haro','Peru'),(5,'Alfonso Durán','Colombia');
 /*!40000 ALTER TABLE `arbitro` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -85,7 +84,7 @@ CREATE TABLE `jugador` (
   PRIMARY KEY (`idJugador`),
   KEY `fk_jugadores_seleccionesnacionales_idx` (`sn_idSeleccion`),
   CONSTRAINT `fk_jugadores_seleccionesnacionales` FOREIGN KEY (`sn_idSeleccion`) REFERENCES `seleccion` (`idSeleccion`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -119,7 +118,7 @@ CREATE TABLE `partido` (
   CONSTRAINT `fk_partidos_arbitros1` FOREIGN KEY (`arbitro`) REFERENCES `arbitro` (`idArbitro`),
   CONSTRAINT `fk_partidos_seleccionesnacionales1` FOREIGN KEY (`seleccionLocal`) REFERENCES `seleccion` (`idSeleccion`),
   CONSTRAINT `fk_partidos_seleccionesnacionales2` FOREIGN KEY (`seleccionVisitante`) REFERENCES `seleccion` (`idSeleccion`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -128,7 +127,7 @@ CREATE TABLE `partido` (
 
 LOCK TABLES `partido` WRITE;
 /*!40000 ALTER TABLE `partido` DISABLE KEYS */;
-INSERT INTO `partido` VALUES (1,2,1,1,'2020-11-13',3),(2,1,3,2,'2020-11-17',4);
+INSERT INTO `partido` VALUES (1,2,1,1,'2020-11-13',3),(2,1,3,2,'2020-11-17',4),(3,2,3,2,'2022-11-15',4);
 /*!40000 ALTER TABLE `partido` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -169,4 +168,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-07 21:22:47
+-- Dump completed on 2022-11-10 11:42:04
