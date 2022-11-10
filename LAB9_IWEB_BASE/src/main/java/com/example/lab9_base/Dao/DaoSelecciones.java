@@ -24,6 +24,7 @@ public class DaoSelecciones extends DaoBase {
             pstmt.setInt(1,idSeleccion);
             try (ResultSet rs = pstmt.executeQuery()){
                 if(rs.next()){
+                    seleccion = new Seleccion();
                     seleccion.setIdSeleccion(idSeleccion);
                     seleccion.setNombre(rs.getString("nombre"));
                     seleccion.setTecnico(rs.getString("tecnico"));

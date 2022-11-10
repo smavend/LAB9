@@ -12,6 +12,7 @@ public class DaoPartidos extends DaoBase {
 
         ArrayList<Partido> partidos = new ArrayList<>();
         DaoSelecciones daoSelecciones = new DaoSelecciones();
+        DaoArbitros daoArbitros = new DaoArbitros();
         Partido partido;
 
         String sql = "select * from partido";
@@ -24,7 +25,7 @@ public class DaoPartidos extends DaoBase {
             partido.setFecha(rs.getString("fecha"));
             partido.setSeleccionLocal(daoSelecciones.obtenerSeleccionXId(rs.getInt("seleccionLocal")));
             partido.setSeleccionVisitante(daoSelecciones.obtenerSeleccionXId(rs.getInt("seleccionVisitante")));
-            
+            partido.setArbitro(daoArbitros.buscarArbitro(rs.getInt("arbitro")));
 
             Estadio estadio = new Estadio();
 

@@ -13,7 +13,7 @@ public class DaoArbitros extends DaoBase {
 
     public ArrayList<Arbitro> listarArbitros() {
         ArrayList<Arbitro> arbitros = new ArrayList<>();
-        String sql = "SELECT * FROM lab9.arbitro";
+        String sql = "SELECT * FROM arbitro";
 
         try (Connection connection = this.getConnection();
              Statement stm = connection.createStatement();
@@ -72,6 +72,7 @@ public class DaoArbitros extends DaoBase {
             pstmt.setInt(1,id);
             try (ResultSet rs = pstmt.executeQuery()){
                 if(rs.next()){
+                    arbitro = new Arbitro();
                     arbitro.setIdArbitro(id);
                     arbitro.setPais(rs.getString("pais"));
                     arbitro.setNombre(rs.getString("nombre"));

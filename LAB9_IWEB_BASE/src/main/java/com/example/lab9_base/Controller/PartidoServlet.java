@@ -1,5 +1,6 @@
 package com.example.lab9_base.Controller;
 
+import com.example.lab9_base.Dao.DaoPartidos;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -27,20 +28,18 @@ public class PartidoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        DaoPartidos daoPartidos = new DaoPartidos();
         String action = request.getParameter("action") == null ? "lista" : request.getParameter("action");
         RequestDispatcher view;
         switch (action) {
             case "lista":
-                /*
-                Inserte su código aquí
-                 */
+                request.setAttribute("listaPartidos", daoPartidos.listaDePartidos());
                 view = request.getRequestDispatcher("index.jsp");
                 view.forward(request, response);
                 break;
             case "crear":
-                /*
-                Inserte su código aquí
-                 */
+                view = request.getRequestDispatcher("partidos/form.jsp");
+                view.forward(request, response);
                 break;
 
         }

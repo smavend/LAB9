@@ -17,6 +17,7 @@ public class DaoEstadio extends  DaoBase{
             pstmt.setInt(1,idEstadio);
             try (ResultSet rs = pstmt.executeQuery()){
                 if(rs.next()){
+                    estadio = new Estadio();
                     estadio.setIdEstadio(idEstadio);
                     estadio.setNombre(rs.getString("nombre"));
                     estadio.setProvincia(rs.getString("provincia"));
