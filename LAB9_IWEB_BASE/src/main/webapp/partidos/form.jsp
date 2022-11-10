@@ -11,11 +11,29 @@
     </head>
     <body>
         <div class='container'>
+            <br>
+            <nav class="navbar navbar-expand-md navbar-light bg-light">
+                <a class="navbar-brand" href="#">Clasificatorias Sudamericanas Qatar 2022</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                    <ul class="navbar-nav">
+                        <li class="nav-item" >
+                            <a class="nav-link" href="<%=request.getContextPath()%>/PartidoServlet">Partidos</a>
+                        </li>
+                        <li class="nav-item" >
+                            <a class="nav-link" href="<%=request.getContextPath()%>/ArbitroServlet">Arbitros</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
             <div class="row mb-4">
                 <div class="col"></div>
                 <div class="col-md-6">
                     <h1 class='mb-3'>Crear un Partido de Clasificatorias</h1>
-                    <form method="POST" action="<%=request.getContextPath()%>/PartidoServlet?action=guardar">
+                    <form method="post" action="<%=request.getContextPath()%>/PartidoServlet?action=guardar">
                         <div class="form-group">
                             <label for="jornada">Jornada</label>
                             <input type="number" id="jornada" class="form-control" name="jornada" required>

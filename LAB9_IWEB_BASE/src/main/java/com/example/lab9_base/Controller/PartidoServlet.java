@@ -32,6 +32,7 @@ public class PartidoServlet extends HttpServlet {
                 partido.setSeleccionLocal(daoSelecciones.obtenerSeleccionXId(Integer.parseInt(request.getParameter("local"))));
                 partido.setSeleccionVisitante(daoSelecciones.obtenerSeleccionXId(Integer.parseInt(request.getParameter("visitante"))));
                 partido.setArbitro(daoArbitros.buscarArbitro(Integer.parseInt(request.getParameter("arbitro"))));
+<<<<<<< HEAD
                 partidosList = daoPartidos.listaDePartidos();
                 boolean valid = true;
                 for (Partido p: partidosList){
@@ -62,6 +63,13 @@ public class PartidoServlet extends HttpServlet {
                     view = request.getRequestDispatcher("partidos/form.jsp");
                     view.forward(request, response);
                 }
+=======
+
+                daoPartidos.crearPartido(partido);
+
+                response.sendRedirect(request.getContextPath() + "/PartidoServlet");
+
+>>>>>>> f9d24a6b148ef246da1a86fa01efc7b72ec62ab5
 
                 break;
 
