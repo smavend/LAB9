@@ -1,5 +1,6 @@
 package com.example.lab9_base.Dao;
 
+import com.example.lab9_base.Bean.Estadio;
 import com.example.lab9_base.Bean.Partido;
 import com.example.lab9_base.Bean.Seleccion;
 
@@ -21,11 +22,16 @@ public class DaoPartidos extends DaoBase {
             partido = new Partido();
             partido.setNumeroJornada(rs.getInt("numeroJornada"));
             partido.setFecha(rs.getString("fecha"));
-            Seleccion seleccionLocal = new Seleccion();
-            seleccionLocal.setIdSeleccion(rs.getInt("seleccionLocal"));
-            seleccionLocal.setNombre(daoSelecciones.obtenerNameId(rs.getInt("seleccionLocal")));
+            partido.setSeleccionLocal(daoSelecciones.obtenerSeleccionXId(rs.getInt("seleccionLocal")));
 
-            partido.setSeleccionLocal(seleccionLocal);
+            Seleccion seleccionVisitante = new Seleccion();
+            seleccionVisitante.setIdSeleccion(rs.getInt("seleccionVisitante"));
+            seleccionVisitante.setNombre(daoSelecciones.obtenerNameId(rs.getInt("seleccionVisitante")));
+            partido.setSeleccionVisitante(seleccionVisitante);
+
+            Estadio estadio = new Estadio();
+
+
             partidos.add(partido);
             }
 

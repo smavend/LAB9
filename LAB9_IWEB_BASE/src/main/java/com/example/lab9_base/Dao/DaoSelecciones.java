@@ -1,5 +1,6 @@
 package com.example.lab9_base.Dao;
 
+import com.example.lab9_base.Bean.Estadio;
 import com.example.lab9_base.Bean.Seleccion;
 
 import java.sql.*;
@@ -14,23 +15,30 @@ public class DaoSelecciones extends DaoBase {
         */
         return selecciones;
     }
-    public String obtenerNameId (int idSeleccion){
-        Seleccion seleccion;
-        String nombre = null;
-        String sql = "SELECT nombre FROM seleccion WHERE idSeleccion = ?";
+    public Seleccion obtenerSeleccionXId (int idSeleccion){
+        Seleccion seleccion = null;
+        String sql = "SELECT * FROM seleccion WHERE idSeleccion = ?";
+        DaoEstadio daoEstadio = new DaoEstadio();
         try(Connection connection = this.getConnection();
             PreparedStatement pstmt = connection.prepareStatement(sql)){
             pstmt.setInt(1,idSeleccion);
             try (ResultSet rs = pstmt.executeQuery()){
                 if(rs.next()){
-                    nombre = rs.getString(1);
+                    seleccion.setIdSeleccion(idSeleccion);
+                    seleccion.setNombre(rs.getString("nombre"));
+                    seleccion.setTecnico(rs.getString("tecnico"));
+
+                    Estadio estadio = new Estadio();
+
+                    estadio.setIdEstadio(daoEstadio.obtenerEstadioXId(rs.getInt("estadio_idEstadio")));
+
                 }
             }
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return nombre;
+        return seleccion;
     }
 
 }
