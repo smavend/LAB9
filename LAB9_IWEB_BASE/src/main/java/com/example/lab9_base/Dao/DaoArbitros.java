@@ -30,7 +30,7 @@ public class DaoArbitros extends DaoBase {
         } catch (SQLException throwables){
             throwables.printStackTrace();
         }
-        
+
         return arbitros;
     }
 
