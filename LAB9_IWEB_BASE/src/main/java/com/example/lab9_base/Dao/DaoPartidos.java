@@ -10,9 +10,10 @@ public class DaoPartidos extends DaoBase {
     public ArrayList<Partido> listaDePartidos() {
 
         ArrayList<Partido> partidos = new ArrayList<>();
+        DaoSelecciones daoSelecciones = new DaoSelecciones();
         Partido partido;
 
-        String sql = "select * from heroe";
+        String sql = "select * from partido";
         try (Connection connection = this.getConnection();
              Statement statement = connection.createStatement();
              ResultSet rs = statement.executeQuery(sql)){
@@ -22,8 +23,10 @@ public class DaoPartidos extends DaoBase {
             partido.setFecha(rs.getString("fecha"));
             Seleccion seleccionLocal = new Seleccion();
             seleccionLocal.setIdSeleccion(rs.getInt("seleccionLocal"));
-            partido.setSeleccionLocal();
-            heroesList.add(newHero);
+            seleccionLocal.setNombre(daoSelecciones.obtenerNameId(rs.getInt("seleccionLocal")));
+
+            partido.setSeleccionLocal(seleccionLocal);
+            partidos.add(partido);
             }
 
         } catch (SQLException e) {
