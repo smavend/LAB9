@@ -33,9 +33,29 @@ public class ArbitroServlet extends HttpServlet {
                 break;
 
             case "buscar":
-                /*
-                Inserte su código aquí
-                */
+
+
+                String tipo = request.getParameter("tipo");
+                ArrayList<Arbitro> listarbitro;
+                switch (tipo){
+                    case "nombre":
+                         listarbitro = daoArbitros.busquedaNombre(tipo);
+                        request.setAttribute("listarbitro", listarbitro);
+
+                        view= request.getRequestDispatcher("list.jsp");
+                        view.forward(request, response);
+                        break;
+
+                    case "pais":
+                        listarbitro = daoArbitros.busquedaPais(tipo);
+                        request.setAttribute("listarbitro", listarbitro);
+
+                        view = request.getRequestDispatcher("list.jsp");
+                        view.forward(request, response);
+                        break;
+
+                }
+
                 break;
 
             case "guardar":
