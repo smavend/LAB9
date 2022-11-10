@@ -90,4 +90,22 @@ public class DaoArbitros extends DaoBase {
         Inserte su código aquí
         */
     }
+
+    public void guardar(Arbitro arbitro) {
+
+        String sql = "INSERT INTO `lab9`.`arbitro` (`nombre`, `pais`) VALUES (?, ?);";
+
+        try (Connection connection = this.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+
+            pstmt.setString(1, arbitro.getNombre());
+            pstmt.setString(2, arbitro.getPais());
+            
+            pstmt.executeUpdate();
+
+        } catch (SQLException throwables){
+            throwables.printStackTrace();
+        }
+    }
+
 }

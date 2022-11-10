@@ -1,4 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="listapaises" scope="request" type="java.util.ArrayList<java.lang.String>">
+
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -17,10 +20,20 @@
                             <input type="text" class="form-control" name="nombre">
                         </div>
                         <div class="form-group">
-                            <label>País</label>
-                            <select name="pais" class="form-control">
-                                <%--  COLOCAR LISTA DE PAÍSES BRINDADA EN EL SERVLET--%>
+                            <label for="pais">País</label>
+                            <select name="pais" id="pais" class="form-control">
+                                <% for ( String paisArbitro : listapaises) {%>
+                                <option value="<%=paisArbitro%>">
+                                    <%=paisArbitro%>
+                                </option>
+                                <% }%>
                             </select>
+
+
+
+
+
+
                         </div>
                         <button type="submit" class="btn btn-primary">Guardar</button>
                         <a href="<%= request.getContextPath()%>/ArbitroServlet" class="btn btn-danger">Cancelar</a>

@@ -26,10 +26,11 @@ public class ArbitroServlet extends HttpServlet {
 
             case "lista":
 
-                request.setAttribute("listaArbitro", daoArbitros.listarArbitros());
-                view = request.getRequestDispatcher("/arbitros/list.jsp");
-                view.forward(request, response);
 
+
+            case "crear":
+
+                break;
 
             case "buscar":
                 /*
@@ -38,16 +39,23 @@ public class ArbitroServlet extends HttpServlet {
                 break;
 
             case "guardar":
-                /*
-                Inserte su código aquí
-                */
+
+                String nombreArb = request.getParameter("nombre");
+                String paisArb = request.getParameter("pais");
+
+                Arbitro arbitro1 = new Arbitro();
+                arbitro1.setNombre(nombreArb);
+                arbitro1.setPais(paisArb);
+                daoArbitros.guardar(arbitro1);
+
+
+                response.sendRedirect(request.getContextPath() + "/JobServlet");
+
+
                 break;
 
             case "borrar":  // JobServlet?action=borrar&id=50
-                int arbitroID = Integer.parseInt(request.getParameter("id"));
-                daoArbitros.borrarArbitro(arbitroID);
 
-                response.sendRedirect(request.getContextPath() + "/JobServlet");
                 break;
 
         }
@@ -68,25 +76,25 @@ public class ArbitroServlet extends HttpServlet {
         ArrayList<String> opciones = new ArrayList<>();
         opciones.add("nombre");
         opciones.add("pais");
+        DaoArbitros daoArbitros = new DaoArbitros();
 
         switch (action) {
             case "lista":
-                /*
-                Inserte su código aquí
-                 */
+                request.setAttribute("listaArbitro", daoArbitros.listarArbitros());
                 view = request.getRequestDispatcher("/arbitros/list.jsp");
                 view.forward(request, response);
                 break;
             case "crear":
-                /*
-                Inserte su código aquí
-                */
+                request.setAttribute("listapaises", paises);
+                view = request.getRequestDispatcher("/arbitros/form.jsp");
+                view.forward(request, response);
 
                 break;
             case "borrar":
-                /*
-                Inserte su código aquí
-                */
+                int arbitroID = Integer.parseInt(request.getParameter("id"));
+                daoArbitros.borrarArbitro(arbitroID);
+
+                response.sendRedirect(request.getContextPath() + "/JobServlet");
                 break;
         }
     }
