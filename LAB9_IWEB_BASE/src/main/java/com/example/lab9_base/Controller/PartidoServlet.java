@@ -33,9 +33,7 @@ public class PartidoServlet extends HttpServlet {
                 partido.setSeleccionVisitante(daoSelecciones.obtenerSeleccionXId(Integer.parseInt(request.getParameter("visitante"))));
                 partido.setArbitro(daoArbitros.buscarArbitro(Integer.parseInt(request.getParameter("arbitro"))));
                 partidosList = daoPartidos.listaDePartidos();
-                for (Partido p: partidosList){
-                    if(partido.)
-                }
+
                 break;
 
         }

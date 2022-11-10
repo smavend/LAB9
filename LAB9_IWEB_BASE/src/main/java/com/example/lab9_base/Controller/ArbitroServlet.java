@@ -18,43 +18,32 @@ public class ArbitroServlet extends HttpServlet {
         RequestDispatcher view;
         Arbitro arbitro = new Arbitro();
         DaoArbitros daoArbitros = new DaoArbitros();
+        ArrayList<Arbitro> listaArbitro;
         ArrayList<String> opciones = new ArrayList<>();
-        opciones.add("nombre");
-        opciones.add("pais");
+        opciones.add("Nombre");
+        opciones.add("Pais");
 
         switch (action) {
 
-            case "lista":
-
-
-
-            case "crear":
-
-                break;
 
             case "buscar":
-
-
+                String busqueda = request.getParameter("buscar");
                 String tipo = request.getParameter("tipo");
-                ArrayList<Arbitro> listarbitro;
-                switch (tipo){
-                    case "nombre":
-                         listarbitro = daoArbitros.busquedaNombre(tipo);
-                        request.setAttribute("listarbitro", listarbitro);
 
-                        view= request.getRequestDispatcher("list.jsp");
-                        view.forward(request, response);
-                        break;
+                if (tipo.equalsIgnoreCase("Nombre")){
 
-                    case "pais":
-                        listarbitro = daoArbitros.busquedaPais(tipo);
-                        request.setAttribute("listarbitro", listarbitro);
+                    request.setAttribute("listaArbitro", daoArbitros.busquedaNombre(busqueda));
 
-                        view = request.getRequestDispatcher("list.jsp");
-                        view.forward(request, response);
-                        break;
+                }else{
 
+                    request.setAttribute("listaArbitro", daoArbitros.busquedaPais(busqueda));
                 }
+                request.setAttribute("listaopciones",opciones);
+                view = request.getRequestDispatcher("arbitros/list.jsp");
+                view.forward(request, response);
+
+
+
 
                 break;
 
@@ -67,16 +56,10 @@ public class ArbitroServlet extends HttpServlet {
                 arbitro1.setNombre(nombreArb);
                 arbitro1.setPais(paisArb);
                 daoArbitros.guardar(arbitro1);
-
-
-                response.sendRedirect(request.getContextPath() + "/JobServlet");
-
-
+                response.sendRedirect(request.getContextPath() + "/ArbitroServlet");
                 break;
 
-            case "borrar":  // JobServlet?action=borrar&id=50
 
-                break;
 
         }
     }
@@ -94,24 +77,26 @@ public class ArbitroServlet extends HttpServlet {
         paises.add("Uruguay");
         paises.add("Colombia");
         ArrayList<String> opciones = new ArrayList<>();
-        opciones.add("nombre");
-        opciones.add("pais");
+        opciones.add("Nombre");
+        opciones.add("Pais");
         DaoArbitros daoArbitros = new DaoArbitros();
 
         switch (action) {
             case "lista":
                 request.setAttribute("listaArbitro", daoArbitros.listarArbitros());
-                view = request.getRequestDispatcher("/arbitros/list.jsp");
+                request.setAttribute("listaopciones",opciones);
+                view = request.getRequestDispatcher("arbitros/list.jsp");
                 view.forward(request, response);
                 break;
             case "crear":
                 request.setAttribute("listapaises", paises);
-                view = request.getRequestDispatcher("/arbitros/form.jsp");
+                view = request.getRequestDispatcher("arbitros/form.jsp");
                 view.forward(request, response);
 
                 break;
             case "borrar":
                 String arbitroID = request.getParameter("id");
+
                 daoArbitros.borrarArbitro(arbitroID);
 
                 response.sendRedirect(request.getContextPath() + "/ArbitroServlet");

@@ -49,18 +49,50 @@ public class DaoArbitros extends DaoBase {
     public ArrayList<Arbitro> busquedaPais(String pais) {
 
         ArrayList<Arbitro> arbitros = new ArrayList<>();
-        /*
-        Inserte su código aquí
-        */
+        String sql = "SELECT * FROM arbitro where lower(pais) like ?";
+
+        try (Connection connection = this.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setString(1,"%"+pais+"%");
+            ResultSet rs = pstmt.executeQuery();
+            while(rs.next()){
+                Arbitro arbitro = new Arbitro();
+                arbitro.setIdArbitro(rs.getInt(1));
+                arbitro.setNombre(rs.getString(2));
+                arbitro.setPais(rs.getString(3));
+
+                arbitros.add(arbitro);
+            }
+        } catch (SQLException throwables){
+            throwables.printStackTrace();
+        }
         return arbitros;
     }
 
     public ArrayList<Arbitro> busquedaNombre(String nombre) {
 
         ArrayList<Arbitro> arbitros = new ArrayList<>();
-        /*
-        Inserte su código aquí
-        */
+
+        String sql = "SELECT * FROM arbitro where lower(nombre) like ?";
+
+        try (Connection connection = this.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+                pstmt.setString(1,"%"+nombre+"%");
+                ResultSet rs = pstmt.executeQuery();
+            while(rs.next()){
+                Arbitro arbitro = new Arbitro();
+                arbitro.setIdArbitro(rs.getInt(1));
+                arbitro.setNombre(rs.getString(2));
+                arbitro.setPais(rs.getString(3));
+
+                arbitros.add(arbitro);
+            }
+        } catch (SQLException throwables){
+            throwables.printStackTrace();
+        }
+
+
+
         return arbitros;
     }
 
@@ -85,14 +117,14 @@ public class DaoArbitros extends DaoBase {
         return arbitro;
     }
 
-    public void borrarArbitro (String arbitroID) {
+    public void borrarArbitro (String ID) {
 
-        String sql = "DELETE FROM jobs WHERE idArbitro = ?";
+        String sql = "DELETE FROM arbitro WHERE idArbitro = ?";
 
         try (Connection connection = this.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
 
-            pstmt.setString(1,arbitroID );
+            pstmt.setString(1,ID );
 
 
             pstmt.executeUpdate();

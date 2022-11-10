@@ -1,8 +1,8 @@
 <%@ page import="com.example.lab9_base.Bean.Arbitro" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<jsp:useBean id="listaArbitro" scope="request" type="java.util.ArrayList<com.example.lab9_base.Bean.Arbitro>">
-<jsp:useBean id="listabuscar" scope="request" type="java.util.ArrayList<java.lang.String>">
+<jsp:useBean id="listaArbitro" scope="request" type="java.util.ArrayList<com.example.lab9_base.Bean.Arbitro>"/>
+<jsp:useBean id="listaopciones" scope="request" type="java.util.ArrayList<java.lang.String>"/>
 
 <html>
     <head>
@@ -22,13 +22,15 @@
                 </div>
                 <form method="post" action="<%= request.getContextPath()%>/ArbitroServlet?action=buscar" class="row">
                     <div class="col-lg-3">
-                        <select name="tipo" class="form-control">
-                            <% for ( String opciones : listabuscar) {%>
-                            <option value="<%=opciones%>">
-                            <%=opciones%>
+
+                        <select name="tipo" id="tipo" class="form-control">
+                            <% for ( String opcion : listaopciones) {%>
+                            <option value="<%=opcion%>">
+                                <%=opcion%>
                             </option>
                             <% }%>
                         </select>
+
                     </div>
                     <div class="col-lg-5">
                         <input type="text" class="form-control" name="buscar">

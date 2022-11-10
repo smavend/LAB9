@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id="listapaises" scope="request" type="java.util.ArrayList<java.lang.String>">
+<jsp:useBean id="listapaises" scope="request" type="java.util.ArrayList<java.lang.String>"/>
 
 
 <html>
@@ -28,11 +28,6 @@
                                 </option>
                                 <% }%>
                             </select>
-
-
-
-
-
 
                         </div>
                         <button type="submit" class="btn btn-primary">Guardar</button>
