@@ -41,9 +41,30 @@ public class DaoPartidos extends DaoBase {
     }
 
     public void crearPartido(Partido partido) {
+        String sql = "INSERT INTO partido (idPartido, seleccionLocal, seleccionVisitante, arbitro, fecha, numeroJornada)"+
+                "VALUES (?, ?, ?, ?, ?, ?)";
+        try(Connection connection = this.getConnection();
+            PreparedStatement pstmt = connection.prepareStatement(sql)){
+            pstmt.setInt(1,partido.getIdPartido());
+            pstmt.setInt(1,partido.getIdPartido());
+            pstmt.setInt(1,partido.getIdPartido());
+            pstmt.setInt(1,partido.getIdPartido());
+            pstmt.setInt(1,partido.getIdPartido());
+            pstmt.setInt(1,partido.getIdPartido());
+            try (ResultSet rs = pstmt.executeQuery()){
+                if(rs.next()){
+                    estadio = new Estadio();
+                    estadio.setIdEstadio(idEstadio);
+                    estadio.setNombre(rs.getString("nombre"));
+                    estadio.setProvincia(rs.getString("provincia"));
+                    estadio.setClub(rs.getString("club"));
+                }
+            }
 
-        /*
-        Inserte su código aquí
-        */
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return estadio;
+
     }
 }

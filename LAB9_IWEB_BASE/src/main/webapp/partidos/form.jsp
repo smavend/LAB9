@@ -1,4 +1,8 @@
+<%@ page import="com.example.lab9_base.Bean.Seleccion" %>
+<%@ page import="com.example.lab9_base.Bean.Arbitro" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="listaSel" scope="request" type="java.util.ArrayList<com.example.lab9_base.Bean.Seleccion>"/>
+<jsp:useBean id="arbitros" scope="request" type="java.util.ArrayList<com.example.lab9_base.Bean.Arbitro>"/>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -14,29 +18,35 @@
                     <form method="POST" action="<%=request.getContextPath()%>/PartidoServlet?action=guardar">
                         <div class="form-group">
                             <label>Jornada</label>
-                            <input type="number" class="form-control" name="jornada">
+                            <input type="number" class="form-control" name="jornada" required>
                         </div>
                         <div class="form-group">
                             <label>Fecha</label>
                             <input class="form-control datetimepicker" id="fecha" name="fecha"
-                                   type="date"/>
+                                   type="date" required/>
                         </div>
                         <div class="form-group">
                             <label>Selección local</label>
                             <select name="local" class="form-control">
-                                <%--                       COLOCAR LISTA DE SELECCIONES DE LA BASE DE DATOS--%>
+                                <% for (Seleccion sel: listaSel) {%>
+                                <option value="<%=sel.getIdSeleccion()%>"><%=sel.getNombre()%></option>
+                                <% } %>
                             </select>
                         </div>
                         <div class="form-group">
                             <label>Selección Visitante</label>
                             <select name="visitante" class="form-control">
-                                <%--                        COLOCAR LISTA DE SELECCIONES DE LA BASE DE DATOS--%>
+                                <% for (Seleccion s: listaSel) {%>
+                                <option value="<%=s.getIdSeleccion()%>"><%=s.getNombre()%></option>
+                                <% } %>
                             </select>
                         </div>
                         <div class="form-group">
                             <label>Árbitro</label>
                             <select name="arbitro" class="form-control">
-                                <%--                        COLOCAR LISTA DE ÁRBITRO DE LA BASE DE DATOS--%>
+                                <% for (Arbitro arbitro: arbitros) {%>
+                                <option value="<%=arbitro.getIdArbitro()%>"><%=arbitro.getNombre()%></option>
+                                <% } %>
                             </select>
                         </div>
                         <button type="submit" class="btn btn-primary">Guardar</button>
