@@ -20,7 +20,7 @@
                 <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                     <ul class="navbar-nav">
                         <li class="nav-item" >
-                            <a class="nav-link" href="<%=request.getContextPath()%>/PartidoServlet">Partidos</a>
+                            <a class="nav-link active" href="<%=request.getContextPath()%>/PartidoServlet">Partidos</a>
                         </li>
                         <li class="nav-item" >
                             <a class="nav-link" href="<%=request.getContextPath()%>/ArbitroServlet">Arbitros</a>
@@ -73,6 +73,20 @@
                 </div>
                 <div class="col"></div>
             </div>
+            <div style="position: fixed; bottom: 40px; right: 40px;" aria-live="polite" aria-atomic="true">
+                <div class="toast text-black" id=toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
+                    <div class="toast-header">
+                        <strong class="mr-auto text-primary">En caso de error</strong>
+                        <small>now</small>
+                        <button type="button" class="ml-2 mb-1 close close-white" data-dismiss="toast" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="toast-body">
+                        Revise que el partido sea nuevo e intente nuevamente.
+                    </div>
+                </div>
+            </div>
         </div>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
                 integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -83,5 +97,10 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
                 integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
                 crossorigin="anonymous"></script>
+        <script>
+            $(document).ready(function (){
+                $('.toast').toast('show');
+            })
+        </script>
     </body>
 </html>

@@ -38,10 +38,7 @@ public class PartidoServlet extends HttpServlet {
                     response.sendRedirect(request.getContextPath() + "/PartidoServlet");
                 }
                 else{
-                    request.setAttribute("listaSel", daoSelecciones.listarSelecciones());
-                    request.setAttribute("arbitros", daoArbitros.listarArbitros());
-                    view = request.getRequestDispatcher("partidos/form.jsp");
-                    view.forward(request, response);
+                    response.sendRedirect(request.getContextPath() + "/PartidoServlet?action=crear");
                 }
                 break;
         }

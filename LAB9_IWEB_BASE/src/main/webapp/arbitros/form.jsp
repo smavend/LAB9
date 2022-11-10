@@ -22,7 +22,7 @@
                             <a class="nav-link" href="<%=request.getContextPath()%>/PartidoServlet">Partidos</a>
                         </li>
                         <li class="nav-item" >
-                            <a class="nav-link" href="<%=request.getContextPath()%>/ArbitroServlet">Arbitros</a>
+                            <a class="nav-link active" href="<%=request.getContextPath()%>/ArbitroServlet">Arbitros</a>
                         </li>
                     </ul>
                 </div>
@@ -35,7 +35,7 @@
                     <form method="POST" action="<%=request.getContextPath()%>/ArbitroServlet?action=guardar">
                         <div class="form-group">
                             <label>Nombre</label>
-                            <input type="text" class="form-control" name="nombre">
+                            <input type="text" class="form-control" name="nombre" required>
                         </div>
                         <div class="form-group">
                             <label for="pais">País</label>
@@ -54,6 +54,20 @@
                 </div>
                 <div class="col"></div>
             </div>
+            <div style="position: fixed; bottom: 40px; right: 40px;" aria-live="polite" aria-atomic="true">
+                <div class="toast text-black" id=toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
+                    <div class="toast-header">
+                        <strong class="mr-auto text-primary">Recuerda</strong>
+                        <small>now</small>
+                        <button type="button" class="ml-2 mb-1 close close-white" data-dismiss="toast" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="toast-body">
+                        El nombre del árbitro debe ser uno que no esté registrado.
+                    </div>
+                </div>
+            </div>
         </div>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
                 integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -64,6 +78,11 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
                 integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
                 crossorigin="anonymous"></script>
+        <script>
+            $(document).ready(function (){
+                $('.toast').toast('show');
+            })
+        </script>
 
     </body>
 </html>

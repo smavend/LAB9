@@ -24,7 +24,7 @@
                             <a class="nav-link" href="<%=request.getContextPath()%>/PartidoServlet">Partidos</a>
                         </li>
                         <li class="nav-item" >
-                            <a class="nav-link" href="<%=request.getContextPath()%>/ArbitroServlet">Arbitros</a>
+                            <a class="nav-link active" href="<%=request.getContextPath()%>/ArbitroServlet">Arbitros</a>
                         </li>
                     </ul>
                 </div>

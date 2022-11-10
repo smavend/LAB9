@@ -42,17 +42,24 @@ public class DaoPartidos extends DaoBase {
         String sql = "INSERT INTO partido (seleccionLocal, seleccionVisitante, arbitro, fecha, numeroJornada)"+
                 "VALUES ( ?, ?, ?, ?, ?)";
         DaoPartidos daoPartidos = new DaoPartidos();
+        DaoSelecciones daoSelecciones = new DaoSelecciones();
         try(Connection connection = this.getConnection();
             PreparedStatement pstmt = connection.prepareStatement(sql)){
             boolean valid = true;
-            for (Partido p: daoPartidos.listaDePartidos()){
-                if(p.getSeleccionLocal().getIdSeleccion()==partido.getSeleccionLocal().getIdSeleccion() && p.getSeleccionVisitante().getIdSeleccion() == partido.getSeleccionVisitante().getIdSeleccion()){
-                    valid = false;
+            if(partido.getSeleccionLocal() ==null || partido.getSeleccionVisitante()==null){
+                valid = false;
+            }
+            if(valid){
+                for (Partido p: daoPartidos.listaDePartidos()){
+                    if(p.getSeleccionLocal().getIdSeleccion()==partido.getSeleccionLocal().getIdSeleccion() && p.getSeleccionVisitante().getIdSeleccion() == partido.getSeleccionVisitante().getIdSeleccion()){
+                        valid = false;
+                    }
                 }
             }
             if(valid && partido.getSeleccionLocal().getIdSeleccion()==partido.getSeleccionVisitante().getIdSeleccion()){
                 valid = false;
             }
+
             if(valid){
                 pstmt.setInt(1,partido.getSeleccionLocal().getIdSeleccion());
                 pstmt.setInt(2,partido.getSeleccionVisitante().getIdSeleccion());

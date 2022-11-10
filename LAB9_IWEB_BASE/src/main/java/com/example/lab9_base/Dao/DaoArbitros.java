@@ -1,6 +1,7 @@
 package com.example.lab9_base.Dao;
 
 import com.example.lab9_base.Bean.Arbitro;
+import com.example.lab9_base.Bean.Partido;
 import com.example.lab9_base.Bean.Seleccion;
 
 import java.util.ArrayList;
@@ -35,16 +36,6 @@ public class DaoArbitros extends DaoBase {
         return arbitros;
     }
 
-
-
-
-
-
-    public void crearArbitro(Arbitro arbitro) {
-        /*
-        Inserte su código aquí
-        */
-    }
 
     public ArrayList<Arbitro> busquedaPais(String pais) {
 
@@ -134,10 +125,15 @@ public class DaoArbitros extends DaoBase {
         }
     }
 
-    public void guardar(Arbitro arbitro) {
+    public boolean crearArbitro (Arbitro arbitro) {
 
         String sql = "INSERT INTO `lab9`.`arbitro` (`nombre`, `pais`) VALUES (?, ?);";
-
+        DaoArbitros daoArbitros = new DaoArbitros();
+        for (Arbitro a : daoArbitros.listarArbitros()){
+            if(a.getNombre().equalsIgnoreCase(arbitro.getNombre())){
+                return false;
+            }
+        }
         try (Connection connection = this.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
 
@@ -147,8 +143,9 @@ public class DaoArbitros extends DaoBase {
             pstmt.executeUpdate();
 
         } catch (SQLException throwables){
-            throwables.printStackTrace();
+            return false;
         }
+        return true;
     }
 
 }

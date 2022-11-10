@@ -19,7 +19,7 @@
                 <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                     <ul class="navbar-nav">
                         <li class="nav-item" >
-                            <a class="nav-link" href="<%=request.getContextPath()%>/PartidoServlet">Partidos</a>
+                            <a class="nav-link active" href="<%=request.getContextPath()%>/PartidoServlet">Partidos</a>
                         </li>
                         <li class="nav-item" >
                             <a class="nav-link" href="<%=request.getContextPath()%>/ArbitroServlet">Arbitros</a>

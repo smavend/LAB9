@@ -24,27 +24,18 @@ public class ArbitroServlet extends HttpServlet {
         opciones.add("Pais");
 
         switch (action) {
-
-
             case "buscar":
                 String busqueda = request.getParameter("buscar");
                 String tipo = request.getParameter("tipo");
 
                 if (tipo.equalsIgnoreCase("Nombre")){
-
                     request.setAttribute("listaArbitro", daoArbitros.busquedaNombre(busqueda));
-
                 }else{
-
                     request.setAttribute("listaArbitro", daoArbitros.busquedaPais(busqueda));
                 }
                 request.setAttribute("listaopciones",opciones);
                 view = request.getRequestDispatcher("arbitros/list.jsp");
                 view.forward(request, response);
-
-
-
-
                 break;
 
             case "guardar":
@@ -55,8 +46,13 @@ public class ArbitroServlet extends HttpServlet {
                 Arbitro arbitro1 = new Arbitro();
                 arbitro1.setNombre(nombreArb);
                 arbitro1.setPais(paisArb);
-                daoArbitros.guardar(arbitro1);
-                response.sendRedirect(request.getContextPath() + "/ArbitroServlet");
+                if(daoArbitros.crearArbitro(arbitro1)){
+                    response.sendRedirect(request.getContextPath() + "/ArbitroServlet");
+                }
+                else{
+                    response.sendRedirect(request.getContextPath() + "/ArbitroServlet?action=crear");
+                }
+
                 break;
 
 
