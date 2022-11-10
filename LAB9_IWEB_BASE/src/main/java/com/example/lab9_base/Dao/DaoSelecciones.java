@@ -27,11 +27,7 @@ public class DaoSelecciones extends DaoBase {
                     seleccion.setIdSeleccion(idSeleccion);
                     seleccion.setNombre(rs.getString("nombre"));
                     seleccion.setTecnico(rs.getString("tecnico"));
-
-                    Estadio estadio = new Estadio();
-
-                    estadio.setIdEstadio(daoEstadio.obtenerEstadioXId(rs.getInt("estadio_idEstadio")));
-
+                    seleccion.setEstadio(daoEstadio.obtenerEstadioXId(rs.getInt("estadio_idEstadio")));
                 }
             }
 

@@ -23,11 +23,8 @@ public class DaoPartidos extends DaoBase {
             partido.setNumeroJornada(rs.getInt("numeroJornada"));
             partido.setFecha(rs.getString("fecha"));
             partido.setSeleccionLocal(daoSelecciones.obtenerSeleccionXId(rs.getInt("seleccionLocal")));
-
-            Seleccion seleccionVisitante = new Seleccion();
-            seleccionVisitante.setIdSeleccion(rs.getInt("seleccionVisitante"));
-            seleccionVisitante.setNombre(daoSelecciones.obtenerNameId(rs.getInt("seleccionVisitante")));
-            partido.setSeleccionVisitante(seleccionVisitante);
+            partido.setSeleccionVisitante(daoSelecciones.obtenerSeleccionXId(rs.getInt("seleccionVisitante")));
+            
 
             Estadio estadio = new Estadio();
 

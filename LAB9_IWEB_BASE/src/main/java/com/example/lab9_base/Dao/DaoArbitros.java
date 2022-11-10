@@ -1,6 +1,7 @@
 package com.example.lab9_base.Dao;
 
 import com.example.lab9_base.Bean.Arbitro;
+import com.example.lab9_base.Bean.Seleccion;
 
 import java.util.ArrayList;
 import java.sql.*;
@@ -63,11 +64,23 @@ public class DaoArbitros extends DaoBase {
         return arbitros;
     }
 
-    public Arbitro buscarArbitro(int id) {
-        Arbitro arbitro = new Arbitro();
-        /*
-        Inserte su código aquí
-        */
+    public Arbitro buscarArbitro (int id){
+        Arbitro arbitro = null;
+        String sql = "SELECT * FROM arbitro WHERE idArbitro = ?";
+        try(Connection connection = this.getConnection();
+            PreparedStatement pstmt = connection.prepareStatement(sql)){
+            pstmt.setInt(1,id);
+            try (ResultSet rs = pstmt.executeQuery()){
+                if(rs.next()){
+                    arbitro.setIdArbitro(id);
+                    arbitro.setPais(rs.getString("pais"));
+                    arbitro.setNombre(rs.getString("nombre"));
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         return arbitro;
     }
 
