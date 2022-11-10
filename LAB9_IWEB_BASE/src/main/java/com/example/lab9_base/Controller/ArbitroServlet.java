@@ -91,10 +91,10 @@ public class ArbitroServlet extends HttpServlet {
 
                 break;
             case "borrar":
-                int arbitroID = Integer.parseInt(request.getParameter("id"));
+                String arbitroID = request.getParameter("id");
                 daoArbitros.borrarArbitro(arbitroID);
 
-                response.sendRedirect(request.getContextPath() + "/JobServlet");
+                response.sendRedirect(request.getContextPath() + "/ArbitroServlet");
                 break;
         }
     }

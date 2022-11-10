@@ -85,10 +85,21 @@ public class DaoArbitros extends DaoBase {
         return arbitro;
     }
 
-    public void borrarArbitro(int id) {
-        /*
-        Inserte su código aquí
-        */
+    public void borrarArbitro (String arbitroID) {
+
+        String sql = "DELETE FROM jobs WHERE idArbitro = ?";
+
+        try (Connection connection = this.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+
+            pstmt.setString(1,arbitroID );
+
+
+            pstmt.executeUpdate();
+
+        } catch (SQLException throwables){
+            throwables.printStackTrace();
+        }
     }
 
     public void guardar(Arbitro arbitro) {
@@ -100,7 +111,7 @@ public class DaoArbitros extends DaoBase {
 
             pstmt.setString(1, arbitro.getNombre());
             pstmt.setString(2, arbitro.getPais());
-            
+
             pstmt.executeUpdate();
 
         } catch (SQLException throwables){

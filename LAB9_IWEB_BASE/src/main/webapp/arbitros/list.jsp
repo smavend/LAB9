@@ -2,6 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <jsp:useBean id="listaArbitro" scope="request" type="java.util.ArrayList<com.example.lab9_base.Bean.Arbitro>">
+<jsp:useBean id="listabuscar" scope="request" type="java.util.ArrayList<java.lang.String>">
 
 <html>
     <head>
@@ -22,7 +23,11 @@
                 <form method="post" action="<%= request.getContextPath()%>/ArbitroServlet?action=buscar" class="row">
                     <div class="col-lg-3">
                         <select name="tipo" class="form-control">
-                            <%--                    ACA DEBE COLOCAR LA LISTA DE OPCIONES MOSTRADAS EN EL SERVLET--%>
+                            <% for ( String opciones : listabuscar) {%>
+                            <option value="<%=opciones%>">
+                            <%=opciones%>
+                            </option>
+                            <% }%>
                         </select>
                     </div>
                     <div class="col-lg-5">
