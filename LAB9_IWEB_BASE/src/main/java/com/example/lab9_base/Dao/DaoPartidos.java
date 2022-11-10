@@ -46,25 +46,15 @@ public class DaoPartidos extends DaoBase {
         try(Connection connection = this.getConnection();
             PreparedStatement pstmt = connection.prepareStatement(sql)){
             pstmt.setInt(1,partido.getIdPartido());
-            pstmt.setInt(1,partido.getIdPartido());
-            pstmt.setInt(1,partido.getIdPartido());
-            pstmt.setInt(1,partido.getIdPartido());
-            pstmt.setInt(1,partido.getIdPartido());
-            pstmt.setInt(1,partido.getIdPartido());
-            try (ResultSet rs = pstmt.executeQuery()){
-                if(rs.next()){
-                    estadio = new Estadio();
-                    estadio.setIdEstadio(idEstadio);
-                    estadio.setNombre(rs.getString("nombre"));
-                    estadio.setProvincia(rs.getString("provincia"));
-                    estadio.setClub(rs.getString("club"));
-                }
-            }
+            pstmt.setInt(2,partido.getSeleccionLocal().getIdSeleccion());
+            pstmt.setInt(3,partido.getSeleccionVisitante().getIdSeleccion());
+            pstmt.setInt(4,partido.getArbitro().getIdArbitro());
+            pstmt.setString(5,partido.getFecha());
+            pstmt.setInt(6,partido.getNumeroJornada());
 
+            pstmt.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return estadio;
-
     }
 }
