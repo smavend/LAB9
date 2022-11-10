@@ -40,7 +40,7 @@ public class DaoPartidos extends DaoBase {
         return partidos;
     }
 
-    public void crearPartido(Partido partido) {
+    public boolean crearPartido(Partido partido) {
         String sql = "INSERT INTO partido (idPartido, seleccionLocal, seleccionVisitante, arbitro, fecha, numeroJornada)"+
                 "VALUES (?, ?, ?, ?, ?, ?)";
         try(Connection connection = this.getConnection();
@@ -53,8 +53,9 @@ public class DaoPartidos extends DaoBase {
             pstmt.setInt(6,partido.getNumeroJornada());
 
             pstmt.executeUpdate();
+            return true;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            return false;
         }
     }
 }
