@@ -21,14 +21,12 @@ public class DaoPartidos extends DaoBase {
              ResultSet rs = statement.executeQuery(sql)){
             while (rs.next()) {
             partido = new Partido();
+            partido.setIdPartido(rs.getInt("idPartido"));
             partido.setNumeroJornada(rs.getInt("numeroJornada"));
             partido.setFecha(rs.getString("fecha"));
             partido.setSeleccionLocal(daoSelecciones.obtenerSeleccionXId(rs.getInt("seleccionLocal")));
             partido.setSeleccionVisitante(daoSelecciones.obtenerSeleccionXId(rs.getInt("seleccionVisitante")));
             partido.setArbitro(daoArbitros.buscarArbitro(rs.getInt("arbitro")));
-
-            Estadio estadio = new Estadio();
-
 
             partidos.add(partido);
             }
@@ -41,19 +39,33 @@ public class DaoPartidos extends DaoBase {
     }
 
     public boolean crearPartido(Partido partido) {
-        String sql = "INSERT INTO partido (idPartido, seleccionLocal, seleccionVisitante, arbitro, fecha, numeroJornada)"+
-                "VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO partido (seleccionLocal, seleccionVisitante, arbitro, fecha, numeroJornada)"+
+                "VALUES ( ?, ?, ?, ?, ?)";
+        DaoPartidos daoPartidos = new DaoPartidos();
         try(Connection connection = this.getConnection();
             PreparedStatement pstmt = connection.prepareStatement(sql)){
-            pstmt.setInt(1,partido.getIdPartido());
-            pstmt.setInt(2,partido.getSeleccionLocal().getIdSeleccion());
-            pstmt.setInt(3,partido.getSeleccionVisitante().getIdSeleccion());
-            pstmt.setInt(4,partido.getArbitro().getIdArbitro());
-            pstmt.setString(5,partido.getFecha());
-            pstmt.setInt(6,partido.getNumeroJornada());
+            boolean valid = true;
+            for (Partido p: daoPartidos.listaDePartidos()){
+                if(p.getSeleccionLocal().getIdSeleccion()==partido.getSeleccionLocal().getIdSeleccion() && p.getSeleccionVisitante().getIdSeleccion() == partido.getSeleccionVisitante().getIdSeleccion()){
+                    valid = false;
+                }
+            }
+            if(valid && partido.getSeleccionLocal().getIdSeleccion()==partido.getSeleccionVisitante().getIdSeleccion()){
+                valid = false;
+            }
+            if(valid){
+                pstmt.setInt(1,partido.getSeleccionLocal().getIdSeleccion());
+                pstmt.setInt(2,partido.getSeleccionVisitante().getIdSeleccion());
+                pstmt.setInt(3,partido.getArbitro().getIdArbitro());
+                pstmt.setString(4,partido.getFecha());
+                pstmt.setInt(5,partido.getNumeroJornada());
 
-            pstmt.executeUpdate();
-            return true;
+                pstmt.executeUpdate();
+                return true;
+            }
+            else{
+                return false;
+            }
         } catch (SQLException e) {
             return false;
         }

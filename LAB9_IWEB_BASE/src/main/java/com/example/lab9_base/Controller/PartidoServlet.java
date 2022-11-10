@@ -34,28 +34,8 @@ public class PartidoServlet extends HttpServlet {
                 partido.setArbitro(daoArbitros.buscarArbitro(Integer.parseInt(request.getParameter("arbitro"))));
 
                 partidosList = daoPartidos.listaDePartidos();
-                boolean valid = true;
-                for (Partido p: partidosList){
-                    if(p.getSeleccionLocal().getIdSeleccion()==partido.getSeleccionLocal().getIdSeleccion()){
-                        valid = false;
-                    }
-                }
-                if(valid){
-                    if(partido.getSeleccionLocal().getIdSeleccion()==partido.getSeleccionVisitante().getIdSeleccion()){
-                        valid = false;
-                    }
-                }
-                if(valid){
-                    if(daoPartidos.crearPartido(partido)){
-                        response.sendRedirect(request.getContextPath());
-                    }
-                    else{
-                        request.setAttribute("listaSel", daoSelecciones.listarSelecciones());
-                        request.setAttribute("arbitros", daoArbitros.listarArbitros());
-                        view = request.getRequestDispatcher("partidos/form.jsp");
-                        view.forward(request, response);
-                    }
-
+                if(daoPartidos.crearPartido(partido)){
+                    response.sendRedirect(request.getContextPath() + "/PartidoServlet");
                 }
                 else{
                     request.setAttribute("listaSel", daoSelecciones.listarSelecciones());
@@ -63,10 +43,6 @@ public class PartidoServlet extends HttpServlet {
                     view = request.getRequestDispatcher("partidos/form.jsp");
                     view.forward(request, response);
                 }
-
-                daoPartidos.crearPartido(partido);
-
-                response.sendRedirect(request.getContextPath() + "/PartidoServlet");
                 break;
         }
     }
