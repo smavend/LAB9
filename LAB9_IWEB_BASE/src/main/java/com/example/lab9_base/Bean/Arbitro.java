@@ -21,7 +21,7 @@ public class Arbitro {
         this.pais = pais;
     }
 
-    public String getIdArbitro() {
+    public int getIdArbitro() {
         return idArbitro;
     }
 

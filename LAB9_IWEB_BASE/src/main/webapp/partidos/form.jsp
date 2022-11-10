@@ -17,33 +17,33 @@
                     <h1 class='mb-3'>Crear un Partido de Clasificatorias</h1>
                     <form method="POST" action="<%=request.getContextPath()%>/PartidoServlet?action=guardar">
                         <div class="form-group">
-                            <label>Jornada</label>
-                            <input type="number" class="form-control" name="jornada" required>
+                            <label for="jornada">Jornada</label>
+                            <input type="number" id="jornada" class="form-control" name="jornada" required>
                         </div>
                         <div class="form-group">
-                            <label>Fecha</label>
+                            <label for="fecha">Fecha</label>
                             <input class="form-control datetimepicker" id="fecha" name="fecha"
                                    type="date" required/>
                         </div>
                         <div class="form-group">
-                            <label>Selección local</label>
-                            <select name="local" class="form-control">
+                            <label for="local">Selección local</label>
+                            <select id="local" name="local" class="form-control">
                                 <% for (Seleccion sel: listaSel) {%>
                                 <option value="<%=sel.getIdSeleccion()%>"><%=sel.getNombre()%></option>
                                 <% } %>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Selección Visitante</label>
-                            <select name="visitante" class="form-control">
+                            <label for="visitante">Selección Visitante</label>
+                            <select id="visitante" name="visitante" class="form-control">
                                 <% for (Seleccion s: listaSel) {%>
                                 <option value="<%=s.getIdSeleccion()%>"><%=s.getNombre()%></option>
                                 <% } %>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Árbitro</label>
-                            <select name="arbitro" class="form-control">
+                            <label for="arbitro">Árbitro</label>
+                            <select id="arbitro" name="arbitro" class="form-control">
                                 <% for (Arbitro arbitro: arbitros) {%>
                                 <option value="<%=arbitro.getIdArbitro()%>"><%=arbitro.getNombre()%></option>
                                 <% } %>
