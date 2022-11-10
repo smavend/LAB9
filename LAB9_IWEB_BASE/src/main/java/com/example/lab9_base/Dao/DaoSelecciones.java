@@ -13,5 +13,6 @@ public class DaoSelecciones {
         */
         return selecciones;
     }
+    public Strin
 
 }
